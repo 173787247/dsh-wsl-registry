@@ -17,3 +17,17 @@ describe("registry", () => {
     assert.match(out, /values=1/);
   });
 });
+
+// ── subkey enumeration, added after the first release ───────────────────────
+import { normalizeKeys } from "../lib/registry.js";
+
+describe("normalizeKeys", () => {
+  it("keeps the child keys and the value count", () => {
+    const v = normalizeKeys({ path: "HKLM:\\SOFTWARE", subkeys: ["A", "B"], valueCount: 3 });
+    assert.deepEqual(v.subkeys, ["A", "B"]);
+    assert.equal(v.valueCount, 3);
+  });
+  it("defaults to an empty list", () => {
+    assert.deepEqual(normalizeKeys({}).subkeys, []);
+  });
+});
