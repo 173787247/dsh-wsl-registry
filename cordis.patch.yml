@@ -1,0 +1,5 @@
+- insert:
+    - id: dsh-wsl-registry
+      name: dsh-wsl-registry
+      config:
+        timeoutMs: 30000
